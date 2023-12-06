@@ -7,7 +7,7 @@ const Sidebar = () => {
   if (!toggleSideBar) return null;
 
   return (
-    <div>
+    <div className="w-[30%] md:w-[20%]">
       <ul>
         <li>Home</li>
         <li>Shorts</li>
