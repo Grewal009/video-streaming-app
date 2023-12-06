@@ -1,12 +1,22 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa6";
 
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/appSlice";
 const Header = () => {
+  const dispatch = useDispatch();
+  const toggleSlider = () => {
+    dispatch(toggleMenu());
+  };
   return (
     <div className="m-2 p-2 flex justify-between">
       <div className="flex">
         <div className="w-10 h-10 mx-2 bg-green-300 rounded-full hover:bg-slate-200 flex justify-center items-center">
-          <RxHamburgerMenu size={20} className="cursor-pointer" />
+          <RxHamburgerMenu
+            size={20}
+            className="cursor-pointer"
+            onClick={toggleSlider}
+          />
         </div>
         <div className="mx-2 flex items-center">
           <FaYoutube color="red" size={35} />
