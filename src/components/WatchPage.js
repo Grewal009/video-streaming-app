@@ -18,11 +18,16 @@ const WatchPage = () => {
       <h1>WatchPage</h1>
       <iframe
         className="w-[80%] aspect-video"
-        src={"https://www.youtube.com/embed/" + videoId}
+        src={
+          "https://www.youtube.com/embed/" +
+          videoId +
+          "?autoplay=1&playlist=" +
+          videoId +
+          "&loop=1&mute=1"
+        }
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+        allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
     </div>
   );
