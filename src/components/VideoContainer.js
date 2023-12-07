@@ -4,8 +4,8 @@ import { YOUTUBE_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState([]);
-  console.log(videos);
+  const [videos, setVideos] = useState(null);
+  //console.log(videos);
   useEffect(() => {
     getVideos();
   }, []);
@@ -13,15 +13,15 @@ const VideoContainer = () => {
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_API);
     const json = await data.json();
-    console.log(json);
+    //console.log(json);
     setVideos(json.items);
   };
-  if (videos.length === 0) return null;
+  if (!videos) return null;
   return (
-    <div className="mt-3 flex flex-wrap">
+    <div className="m-2 pt-1 flex flex-wrap">
       {videos.map((video, index) => (
         <Link to={"/watch?v=" + video.id}>
-          <VideoCard key={video.id} info={video} />
+          <VideoCard key={index} info={video} />
         </Link>
       ))}
     </div>

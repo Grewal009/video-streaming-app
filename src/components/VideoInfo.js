@@ -21,12 +21,12 @@ const VideoInfo = ({ info }) => {
 
   if (!info) return null;
   return (
-    <div className="w-[70%] md:[80%] mt-2">
+    <div className="w-[80%] mt-2 ">
       <p className="text-xl font-medium w-auto h-auto leading-5">{title}</p>
       <p className="text-base font-bold">{channelTitle}</p>
       <span className="">{likeCount} likes</span>
 
-      <div className="bg-[#F2F2F2] mt-2 p-3 rounded-lg w-[115%]">
+      <div className="bg-[#F2F2F2] mt-2 p-3 rounded-lg ">
         <p className="text-sm font-medium">
           {viewCount} views &nbsp; Published on{" "}
           {publishedAt.split("T").slice(0, 1)} &nbsp;
