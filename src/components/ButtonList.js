@@ -15,8 +15,8 @@ const list = [
 const ButtonList = () => {
   return (
     <div className=" flex overflow-x-scroll no-scrollbar">
-      {list.map((btn) => (
-        <Button name={btn} />
+      {list.map((btn, index) => (
+        <Button key={index} name={btn} />
       ))}
     </div>
   );
