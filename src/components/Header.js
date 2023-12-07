@@ -3,6 +3,7 @@ import { FaYoutube } from "react-icons/fa6";
 
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const toggleSlider = () => {
@@ -18,10 +19,12 @@ const Header = () => {
             onClick={toggleSlider}
           />
         </div>
-        <div className="mx-2 flex items-center">
-          <FaYoutube color="red" size={35} />
-          <span className="px-1 font-bold ">YouTube</span>
-        </div>
+        <Link to={"/"}>
+          <div className="mx-2 flex items-center">
+            <FaYoutube color="red" size={35} />
+            <span className="px-1 font-bold ">YouTube</span>
+          </div>{" "}
+        </Link>
       </div>
       <div className="mx-2 flex justify-center items-center md:w-3/5 ">
         <input

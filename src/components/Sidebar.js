@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const toggleSideBar = useSelector((store) => store.app.isMenuOpen);
@@ -9,7 +10,10 @@ const Sidebar = () => {
   return (
     <div className="w-[30%] md:w-[20%]">
       <ul>
-        <li>Home</li>
+        <li>
+          <Link to={"/"}>Home </Link>
+        </li>
+
         <li>Shorts</li>
         <li>Subscriptions</li>
       </ul>
