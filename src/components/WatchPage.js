@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import VideoInfo from "./VideoInfo";
 import LatestVideo from "./LatestVideo";
+import { addInfo } from "../utils/infoSlice";
 
 const WatchPage = () => {
-  const [videodata, setVideodata] = useState(null);
+  const videodata = useSelector((store) => store.info.vinfo);
   const dispatch = useDispatch();
   let [serachParams] = useSearchParams();
+
+  //videoId is added in dependency array. when it will change useEffect hook will be called.
   const videoId = serachParams.get("v");
   console.log(serachParams.get("v"));
 
-  console.log(videodata);
-
-  useEffect(() => {
-    dispatch(closeMenu());
-    getVideoData();
-  }, [videodata]);
+  console.log("videodata : ", videodata);
 
   const getVideoData = async () => {
     const data = await fetch(
@@ -27,9 +25,15 @@ const WatchPage = () => {
         process.env.REACT_APP_YOUTUBE_API_KEY
     );
     const json = await data.json();
-    console.log(json);
-    setVideodata(json?.items[0]);
+    console.log("data : ", json);
+
+    dispatch(addInfo(json?.items?.[0]));
   };
+
+  useEffect(() => {
+    dispatch(closeMenu());
+    getVideoData();
+  }, [videoId]);
   if (!videodata) return null;
   return (
     <div className="m-3 px-3 flex">
@@ -48,7 +52,7 @@ const WatchPage = () => {
           allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         ></iframe>
 
-        <VideoInfo info={videodata} />
+        <VideoInfo />
       </div>
 
       <LatestVideo />

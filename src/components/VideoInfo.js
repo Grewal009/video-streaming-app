@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const VideoInfo = ({ info }) => {
+const VideoInfo = () => {
   const [showComment, setShowComment] = useState(false);
+  const info = useSelector((store) => store.info.vinfo);
+
   const { snippet, statistics } = info;
 
   const { channelTitle, description, publishedAt, localized, tags } = snippet;
@@ -12,7 +15,7 @@ const VideoInfo = ({ info }) => {
 
   let firstFiveTags = [];
   for (let i = 0; i < 3; i++) {
-    firstFiveTags.push(tags[i]);
+    firstFiveTags.push(tags?.[i]);
   }
 
   const toggleDescription = () => {

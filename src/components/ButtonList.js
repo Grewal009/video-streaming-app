@@ -11,6 +11,8 @@ const list = [
   "Comedy",
   "AI",
   "Trailers",
+  "Gaming",
+  "Podcasts",
 ];
 const ButtonList = () => {
   return (
