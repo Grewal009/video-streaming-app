@@ -2,22 +2,30 @@ import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa6";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
 import { YOUTUBE_SEARCH_SUGGESTIONS_API } from "../utils/constants";
+import { cacheResults } from "../utils/searchSlice";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const dispatch = useDispatch();
+  const searchCache = useSelector((store) => store.search);
   const toggleSlider = () => {
     dispatch(toggleMenu());
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => getSearchSuggestions(), 250);
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSearchSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestions();
+      }
+    }, 250);
 
     //clean up component during rerender
     return () => {
@@ -30,6 +38,13 @@ const Header = () => {
     const json = await data.json();
     console.log(json[1]);
     setSearchSuggestions(json[1]);
+
+    //update cache
+    dispatch(
+      cacheResults({
+        [searchQuery]: json[1],
+      })
+    );
   };
 
   return (
@@ -54,7 +69,7 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search"
-            className="outline-offset-0 py-1 px-3 bg-slate-100 w-3/5  rounded-l-full border-2 border-gray-500 z-50"
+            className=" outline-offset-1 py-1 px-3 bg-slate-100 w-3/5  rounded-l-full border-2 border-gray-500 z-50"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
