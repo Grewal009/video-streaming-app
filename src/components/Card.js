@@ -1,11 +1,11 @@
 const Card = ({ info }) => {
   const { thumbnails, title, description, channelId, publishedAt } = info;
   return (
-    <div className="mx-2 my-2 w-[90%] md:flex md:flex-row md-[w-60%] md:flex-nowrap">
+    <div className=" w-[90%] md:flex md:flex-row md-[w-60%] md:flex-nowrap">
       <img
         alt="thumbnail"
         src={thumbnails.medium.url}
-        className="rounded-lg w-[350px] "
+        className="rounded-lg w-[300px] mr-3"
       />
       <div>
         <p className=" text-base font-bold leading-5">{title}</p>
