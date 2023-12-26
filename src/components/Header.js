@@ -37,7 +37,7 @@ const Header = () => {
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_SUGGESTIONS_API + searchQuery);
     const json = await data.json();
-    console.log(json[1]);
+    // console.log(json[1]);
     setSearchSuggestions(json[1]);
 
     //update cache
@@ -50,14 +50,14 @@ const Header = () => {
 
   const updateSearchQuery = (s) => {
     setSearchQuery(s);
-    console.log(searchQuery);
+    // console.log(searchQuery);
     updateVideos();
   };
 
   const updateVideos = async () => {
     const data = await fetch(SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log("New Videos Data : ", json.items);
+    // console.log("New Videos Data : ", json.items);
 
     dispatch(addResult(json.items));
   };
@@ -94,7 +94,7 @@ const Header = () => {
           <ul className="top-[55px] absolute rounded-2xl border border-gray-200 w-auto z-0 bg-white">
             {showSuggestions &&
               searchSuggestions.map((s, index) => (
-                <Link to={"/results"}>
+                <Link to={"/results"} key={index}>
                   <li
                     key={index}
                     className="px-3 py-1 shadow-md overflow-hidden hover:bg-gray-100"

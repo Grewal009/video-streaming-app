@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import VideoInfo from "./VideoInfo";
 import LatestVideo from "./LatestVideo";
 import { addInfo } from "../utils/infoSlice";
+import CommentsContainer from "./CommentsContainer";
 
 const WatchPage = () => {
   const videodata = useSelector((store) => store.info.vinfo);
@@ -13,9 +14,9 @@ const WatchPage = () => {
 
   //videoId is added in dependency array. when it will change useEffect hook will be called.
   const videoId = serachParams.get("v");
-  console.log(serachParams.get("v"));
+  // console.log(serachParams.get("v"));
 
-  console.log("videodata : ", videodata);
+  // console.log("videodata : ", videodata);
 
   const getVideoData = async () => {
     const data = await fetch(
@@ -25,7 +26,7 @@ const WatchPage = () => {
         process.env.REACT_APP_YOUTUBE_API_KEY
     );
     const json = await data.json();
-    console.log("data : ", json);
+    // console.log("data : ", json);
 
     dispatch(addInfo(json?.items?.[0]));
   };
@@ -53,6 +54,7 @@ const WatchPage = () => {
         ></iframe>
 
         <VideoInfo />
+        <CommentsContainer />
       </div>
 
       <LatestVideo />

@@ -6,14 +6,14 @@ const SearchPage = () => {
   const results = useSelector((store) => store?.res?.result);
   if (!results) return null;
   const { id, snippet } = results;
-  console.log("res : ", id, snippet);
+  // console.log("res : ", id, snippet);
 
   return (
     <div className="m-2 pt-1 w-[80%] flex flex-col ">
       {results.map((res, index) => (
         <Link
-          to={"/watch?v=" + res.id.videoId}
           key={index}
+          to={"/watch?v=" + res.id.videoId}
           className="
         mx-2 my-2"
         >
