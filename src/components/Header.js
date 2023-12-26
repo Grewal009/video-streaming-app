@@ -5,8 +5,9 @@ import { FaYoutube } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Link } from "react-router-dom";
-import { YOUTUBE_SEARCH_SUGGESTIONS_API } from "../utils/constants";
+import { SEARCH_API, YOUTUBE_SEARCH_SUGGESTIONS_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
+import { addResult } from "../utils/resultsSlice";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
@@ -47,6 +48,20 @@ const Header = () => {
     );
   };
 
+  const updateSearchQuery = (s) => {
+    setSearchQuery(s);
+    console.log(searchQuery);
+    updateVideos();
+  };
+
+  const updateVideos = async () => {
+    const data = await fetch(SEARCH_API + searchQuery);
+    const json = await data.json();
+    console.log("New Videos Data : ", json.items);
+
+    dispatch(addResult(json.items));
+  };
+
   return (
     <div className="m-2 p-2 flex justify-between">
       <div className="flex">
@@ -73,18 +88,21 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 1000)}
           />
 
           <ul className="top-[55px] absolute rounded-2xl border border-gray-200 w-auto z-0 bg-white">
             {showSuggestions &&
               searchSuggestions.map((s, index) => (
-                <li
-                  key={index}
-                  className="px-3 py-1 shadow-md overflow-hidden hover:bg-gray-100"
-                >
-                  🔍 {s}
-                </li>
+                <Link to={"/results"}>
+                  <li
+                    key={index}
+                    className="px-3 py-1 shadow-md overflow-hidden hover:bg-gray-100"
+                    onClick={() => updateSearchQuery(s)}
+                  >
+                    🔍 {s}
+                  </li>
+                </Link>
               ))}
           </ul>
 

@@ -3,6 +3,7 @@ import appSlice from "./appSlice";
 import videoSlice from "./videoSlice";
 import infoSlice from "./infoSlice";
 import searchSlice from "./searchSlice";
+import resultsSlice from "./resultsSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     videos: videoSlice,
     info: infoSlice,
     search: searchSlice,
+    res: resultsSlice,
   },
 });
 
