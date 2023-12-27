@@ -9,3 +9,4 @@ export const SEARCH_API =
   "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=" +
   process.env.REACT_APP_YOUTUBE_API_KEY +
   "&q=";
+export const LIVE_CHAT_COUNT = 15;
