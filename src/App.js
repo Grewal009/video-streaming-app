@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
 import SearchPage from "./components/SearchPage";
+import LiveChat from "./components/LiveChat";
 
 const appRoute = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const appRoute = createBrowserRouter([
       {
         path: "results",
         element: <SearchPage />,
+      },
+      {
+        path: "livechat",
+        element: <LiveChat />,
       },
     ],
   },
