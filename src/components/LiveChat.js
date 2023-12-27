@@ -12,7 +12,7 @@ const LiveChat = () => {
   //API Polling
   useEffect(() => {
     const i = setInterval(() => {
-      console.log("API Polling");
+      //   console.log("API Polling");
       dispatch(
         addMessage({
           name: generateRandomName(),
@@ -28,7 +28,7 @@ const LiveChat = () => {
 
   return (
     <div>
-      <div className="p-1 md:p-2 w-[250px] h-[300px] md:w-[350px] md:h-[450px] border border-gray-600 rounded-md overflow-y-scroll flex flex-col-reverse">
+      <div className="p-1 md:p-2 w-[250px] h-[293px] md:w-[350px] md:h-[450px] border border-gray-600 rounded-md overflow-y-scroll flex flex-col-reverse">
         <div>
           {chats.map((chat, index) => (
             <ChatMessage key={index} name={chat.name} message={chat.message} />
