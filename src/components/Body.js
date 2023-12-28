@@ -5,6 +5,7 @@ import useFetchVideos from "../hooks/useFetchVideos";
 
 const Body = () => {
   useFetchVideos();
+
   return (
     <div className="flex justify-center">
       <Sidebar />

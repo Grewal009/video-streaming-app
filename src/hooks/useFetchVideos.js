@@ -19,7 +19,7 @@ const useFetchVideos = () => {
   };
 
   useEffect(() => {
-    !videos && getVideos();
+    getVideos();
   }, []);
 };
 
